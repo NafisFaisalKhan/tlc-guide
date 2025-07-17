@@ -1,0 +1,16 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+
+# Host
+Host: https://tlcguide.org
+
+# Sitemaps
+Sitemap: https://tlcguide.org/sitemap.xml

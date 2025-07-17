@@ -1,0 +1,38 @@
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/dotted-vim-358802/github.com/nafisfaisalkhan/tlc-guide:$COMMIT_SHA",
+        ".",
+      ]
+    env:
+      - "NODE_ENV=production"
+  # Push the image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "gcr.io/dotted-vim-358802/github.com/nafisfaisalkhan/tlc-guide:$COMMIT_SHA",
+      ]
+  # Deploy image to Cloud Run
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "run",
+        "deploy",
+        "tlc-guide",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
+        "--image",
+        "gcr.io/dotted-vim-358802/github.com/nafisfaisalkhan/tlc-guide:$COMMIT_SHA",
+      ]
+    env:
+      - "NODE_ENV=development"
+options:
+  logging: CLOUD_LOGGING_ONLY
