@@ -82,6 +82,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
         />
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="cffda0ed-4a83-40bc-96fb-7c32600778cc"></script>
       </Head>
       <body
         className={`${montserrat.variable} antialiased`}

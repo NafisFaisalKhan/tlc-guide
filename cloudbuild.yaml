@@ -33,6 +33,6 @@ steps:
         "gcr.io/dotted-vim-358802/github.com/nafisfaisalkhan/tlc-guide:$COMMIT_SHA",
       ]
     env:
-      - "NODE_ENV=development"
+      - "NODE_ENV=production"
 options:
   logging: CLOUD_LOGGING_ONLY
