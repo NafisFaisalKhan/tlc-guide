@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 import { faqData } from "../lib/data";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,80 +16,78 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "NYC TLC License Guide | TLCGuide.org",
-  description: "Step-by-step guide to getting your NYC TLC license for taxi, Uber, Lyft, and for-hire vehicle drivers. Includes costs, requirements, FAQs, and application process.",
-  metadataBase: new URL('https://tlcguide.org'),
+  description:
+    "Step-by-step guide to getting your NYC TLC license for taxi, Uber, Lyft, and for-hire vehicle drivers. Includes costs, requirements, FAQs, and application process.",
+  metadataBase: new URL("https://tlcguide.org"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    title: 'NYC TLC License Guide | TLCGuide.org',
-    description: 'Step-by-step guide to getting your NYC TLC license for taxi, Uber, Lyft, and for-hire vehicle drivers. Includes costs, requirements, FAQs, and application process.',
-    url: 'https://tlcguide.org',
-    siteName: 'TLCGuide',
+    title: "NYC TLC License Guide | TLCGuide.org",
+    description:
+      "Step-by-step guide to getting your NYC TLC license for taxi, Uber, Lyft, and for-hire vehicle drivers. Includes costs, requirements, FAQs, and application process.",
+    url: "https://tlcguide.org",
+    siteName: "TLCGuide",
     images: [
       {
-        url: '/tlc_guide_logo.png',
+        url: "/tlc_guide_logo.png",
         width: 500,
         height: 500,
-        alt: 'TLCGuide Logo',
+        alt: "TLCGuide Logo",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'NYC TLC License Guide | TLCGuide.org',
-    description: 'Step-by-step guide to getting your NYC TLC license for taxi, Uber, Lyft, and for-hire vehicle drivers. Includes costs, requirements, FAQs, and application process.',
-    images: ['/tlc_guide_logo.png'],
-    site: '@tlcguide',
+    card: "summary_large_image",
+    title: "NYC TLC License Guide | TLCGuide.org",
+    description:
+      "Step-by-step guide to getting your NYC TLC license for taxi, Uber, Lyft, and for-hire vehicle drivers. Includes costs, requirements, FAQs, and application process.",
+    images: ["/tlc_guide_logo.png"],
+    site: "@tlcguide",
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: "/favicon.ico",
   },
   other: {
-    keywords: "NYC TLC license, taxi license, Uber NYC, Lyft NYC, for-hire vehicle, TLC application, TLC requirements, TLC cost, TLC FAQ, TLCGuide",
+    keywords:
+      "NYC TLC license, taxi license, Uber NYC, Lyft NYC, for-hire vehicle, TLC application, TLC requirements, TLC cost, TLC FAQ, TLCGuide",
     author: "TLCGuide Team",
     robots: "index, follow",
   },
 };
 
 const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  variable: '--font-montserrat',
-  display: 'swap', // For better performance
-})
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-montserrat",
+  display: "swap", // For better performance
+});
 
 const faqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqData.map(faq => ({
+  mainEntity: faqData.map((faq) => ({
     "@type": "Question",
-    "name": faq.question,
-    "acceptedAnswer": {
+    name: faq.question,
+    acceptedAnswer: {
       "@type": "Answer",
-      "text": faq.answer
-    }
-  }))
+      text: faq.answer,
+    },
+  })),
 };
-
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
-        />
-        <script defer src="https://cloud.umami.is/script.js" data-website-id="cffda0ed-4a83-40bc-96fb-7c32600778cc"></script>
-      </Head>
-      <body
-        className={`${montserrat.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <Script
+        id="faqStructuredData"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
+      <Head></Head>
+      <body className={`${montserrat.variable} antialiased`}>{children}</body>
     </html>
   );
 }
